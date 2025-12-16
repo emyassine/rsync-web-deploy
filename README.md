@@ -9,7 +9,7 @@ No Git on server.
 
 ```bash
 git clone https://github.com/emyassine/rsync-web-deploy.git
-mv rsync-web-deploy/web-sync.sh .
+mv rsync-web-deploy/web-sync.sh /path/to/targe/project/
 chmod +x web-sync.sh
 ````
 
