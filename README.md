@@ -1,7 +1,7 @@
 # rsync-web-deploy
 
-Fast, private deployment script using `rsync`.
-No Git on server. No CI. No bullshit.
+Fast, private deployment using `rsync`.
+No Git on server.
 
 ---
 
@@ -9,9 +9,20 @@ No Git on server. No CI. No bullshit.
 
 ```bash
 git clone https://github.com/emyassine/rsync-web-deploy.git
-cd rsync-web-deploy
+mv rsync-web-deploy/web-sync.sh .
 chmod +x web-sync.sh
 ````
+
+---
+
+## Ignore deploy files (IMPORTANT)
+
+In the **target project** `.gitignore`:
+
+```gitignore
+web-sync.sh
+web-sync.config
+```
 
 ---
 
@@ -42,49 +53,39 @@ declare -A INSTANCES=(
 METHODS=("ssh" "sftp")
 ```
 
-**Contexts**
-
-* `webkernel`
-* `laravel`
-* `static`
-
 ---
 
 ## Deploy
 
 ```bash
-./web-sync.sh
+./web-sync.shweb-sync.sh
 ```
 
-Then:
-
-1. Choose instance
-2. Choose method
-3. Deploy
+Choose instance → choose method → deploy.
 
 ---
 
 ## What it does
 
-* Syncs current directory to server with `rsync`
+* Sync current directory via `rsync`
 * Respects `.gitignore`
-* Excludes `.git`, `.env`, cache dirs
-* Uses SSH or SFTP
+* Excludes `.git`, `.env`, caches
+* SSH or SFTP
 
-### Post-deploy (SSH only)
+### SSH only
 
 * `composer install --no-dev`
 * `php artisan migrate --force`
-* Cache optimizations
+* Cache optimize
 
 ---
 
 ## Requirements
 
-* Bash
+* bash
 * rsync
-* SSH access
-* Composer + PHP (for Laravel / WebKernel)
+* ssh
+* php + composer (Laravel / WebKernel)
 
 ---
 
@@ -92,4 +93,4 @@ Then:
 
 MPL-2.0
 
-El Moumen Yassine
+**El Moumen Yassine**
